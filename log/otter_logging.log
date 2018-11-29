@@ -1,12 +1,12 @@
-Wed, 28 Nov 2018 19:52:41 log.py[line:146] INFO Scrapy 1.5.1 started (bot: otter_monitor)
-Wed, 28 Nov 2018 19:52:41 log.py[line:149] INFO Versions: lxml 4.2.1.0, libxml2 2.9.8, cssselect 1.0.3, parsel 1.5.0, w3lib 1.19.0, Twisted 18.7.0, Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) - [GCC 7.2.0], pyOpenSSL 18.0.0 (OpenSSL 1.0.2o  27 Mar 2018), cryptography 2.2.2, Platform Linux-2.6.32-754.2.1.el6.x86_64-x86_64-with-centos-6.10-Final
-Wed, 28 Nov 2018 19:52:41 crawler.py[line:38] INFO Overridden settings: {'BOT_NAME': 'otter_monitor', 'NEWSPIDER_MODULE': 'otter_monitor.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['otter_monitor.spiders']}
-Wed, 28 Nov 2018 19:52:41 middleware.py[line:53] INFO Enabled extensions:
+Thu, 29 Nov 2018 10:34:50 log.py[line:146] INFO Scrapy 1.5.1 started (bot: otter_monitor)
+Thu, 29 Nov 2018 10:34:50 log.py[line:149] INFO Versions: lxml 4.2.1.0, libxml2 2.9.8, cssselect 1.0.3, parsel 1.5.0, w3lib 1.19.0, Twisted 18.7.0, Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) - [GCC 7.2.0], pyOpenSSL 18.0.0 (OpenSSL 1.0.2o  27 Mar 2018), cryptography 2.2.2, Platform Linux-2.6.32-754.2.1.el6.x86_64-x86_64-with-centos-6.10-Final
+Thu, 29 Nov 2018 10:34:50 crawler.py[line:38] INFO Overridden settings: {'BOT_NAME': 'otter_monitor', 'NEWSPIDER_MODULE': 'otter_monitor.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['otter_monitor.spiders']}
+Thu, 29 Nov 2018 10:34:50 middleware.py[line:53] INFO Enabled extensions:
 ['scrapy.extensions.corestats.CoreStats',
  'scrapy.extensions.telnet.TelnetConsole',
  'scrapy.extensions.memusage.MemoryUsage',
  'scrapy.extensions.logstats.LogStats']
-Wed, 28 Nov 2018 19:52:41 middleware.py[line:53] INFO Enabled downloader middlewares:
+Thu, 29 Nov 2018 10:34:50 middleware.py[line:53] INFO Enabled downloader middlewares:
 ['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
  'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
  'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
@@ -19,56 +19,124 @@ Wed, 28 Nov 2018 19:52:41 middleware.py[line:53] INFO Enabled downloader middlew
  'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
  'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
  'scrapy.downloadermiddlewares.stats.DownloaderStats']
-Wed, 28 Nov 2018 19:52:41 middleware.py[line:53] INFO Enabled spider middlewares:
+Thu, 29 Nov 2018 10:34:50 middleware.py[line:53] INFO Enabled spider middlewares:
 ['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
  'otter_monitor.middlewares.UserAgentMiddleware',
  'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
  'scrapy.spidermiddlewares.referer.RefererMiddleware',
  'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
  'scrapy.spidermiddlewares.depth.DepthMiddleware']
-Wed, 28 Nov 2018 19:52:41 middleware.py[line:53] INFO Enabled item pipelines:
+Thu, 29 Nov 2018 10:34:50 middleware.py[line:53] INFO Enabled item pipelines:
 ['otter_monitor.pipelines.OtterPipeline']
-Wed, 28 Nov 2018 19:52:41 engine.py[line:256] INFO Spider opened
-Wed, 28 Nov 2018 19:52:41 logstats.py[line:48] INFO Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-Wed, 28 Nov 2018 19:52:41 telnet.py[line:60] DEBUG Telnet console listening on 127.0.0.1:6023
-Wed, 28 Nov 2018 19:52:41 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter.test%3A8888%2Frobots.txt> from <GET http://otter.test:8888/robots.txt>
-Wed, 28 Nov 2018 19:52:41 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter.test%3A8888%2Frobots.txt> (referer: None)
-Wed, 28 Nov 2018 19:52:41 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/channel_list.htm> from <POST http://otter.test:8888/login.htm>
-Wed, 28 Nov 2018 19:52:41 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter01%3A8888%2Frobots.txt> from <GET http://otter01:8888/robots.txt>
-Wed, 28 Nov 2018 19:52:41 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter01%3A8888%2Frobots.txt> (referer: None)
-Wed, 28 Nov 2018 19:52:41 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/channel_list.htm> (referer: None)
-Wed, 28 Nov 2018 19:52:41 engine.py[line:238] DEBUG Crawled (200) <GET http://otter.test:8888/pipeline_list.htm?channelId=1> (referer: http://otter01:8888/channel_list.htm)
-Wed, 28 Nov 2018 19:52:41 pipelines.py[line:18] INFO {'channelId': 1, 'pplId': '1', 'pplName': 'test_pip1', 'pplStatus': '工作中', 'lastSync': '2018-11-27 06:35:29'}
-Wed, 28 Nov 2018 19:52:41 scraper.py[line:237] DEBUG Scraped from <200 http://otter.test:8888/pipeline_list.htm?channelId=1>
-{'channelId': 1, 'pplId': '1', 'pplName': 'test_pip1', 'pplStatus': '工作中', 'lastSync': '2018-11-27 06:35:29'}
-Wed, 28 Nov 2018 19:52:43 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> from <GET http://otter.test:8888/channel_list.htm?action=channelAction&channelId=1&status=stop&pageIndex=1&searchKey=&eventSubmitDoStatus=true>
-Wed, 28 Nov 2018 19:52:43 engine.py[line:238] DEBUG Crawled (200) <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> (referer: http://otter.test:8888/pipeline_list.htm?channelId=1)
-Wed, 28 Nov 2018 19:52:43 otter.py[line:82] INFO http://otter.test:8888/?action=channelAction&channelId=1&status=start&pageIndex=1&searchKey=&eventSubmitDoStatus=true
-Wed, 28 Nov 2018 19:52:43 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> from <GET http://otter.test:8888/?action=channelAction&channelId=1&status=start&pageIndex=1&searchKey=&eventSubmitDoStatus=true>
-Wed, 28 Nov 2018 19:52:43 dupefilters.py[line:70] DEBUG Filtered duplicate request: <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> - no more duplicates will be shown (see DUPEFILTER_DEBUG to show all duplicates)
-Wed, 28 Nov 2018 19:52:43 engine.py[line:295] INFO Closing spider (finished)
-Wed, 28 Nov 2018 19:52:43 statscollectors.py[line:47] INFO Dumping Scrapy stats:
-{'downloader/request_bytes': 5778,
- 'downloader/request_count': 10,
- 'downloader/request_method_count/GET': 9,
+Thu, 29 Nov 2018 10:34:50 engine.py[line:256] INFO Spider opened
+Thu, 29 Nov 2018 10:34:50 logstats.py[line:48] INFO Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+Thu, 29 Nov 2018 10:34:50 telnet.py[line:60] DEBUG Telnet console listening on 127.0.0.1:6023
+Thu, 29 Nov 2018 10:34:50 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter.test%3A8888%2Frobots.txt> from <GET http://otter.test:8888/robots.txt>
+Thu, 29 Nov 2018 10:34:50 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter.test%3A8888%2Frobots.txt> (referer: None)
+Thu, 29 Nov 2018 10:34:50 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/channel_list.htm> from <POST http://otter.test:8888/login.htm>
+Thu, 29 Nov 2018 10:34:50 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter01%3A8888%2Frobots.txt> from <GET http://otter01:8888/robots.txt>
+Thu, 29 Nov 2018 10:34:50 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter01%3A8888%2Frobots.txt> (referer: None)
+Thu, 29 Nov 2018 10:34:50 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/channel_list.htm> (referer: None)
+Thu, 29 Nov 2018 10:34:50 engine.py[line:238] DEBUG Crawled (200) <GET http://otter.test:8888/pipeline_list.htm?channelId=1> (referer: http://otter01:8888/channel_list.htm)
+Thu, 29 Nov 2018 10:34:50 scraper.py[line:237] DEBUG Scraped from <200 http://otter.test:8888/pipeline_list.htm?channelId=1>
+{'channelId': 1, 'pplId': '1', 'pplName': 'test_pip1', 'pplStatus': '工作中', 'lastSync': '2018-11-29 02:30:26'}
+Thu, 29 Nov 2018 10:34:52 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> from <GET http://otter.test:8888/channel_list.htm?action=channelAction&channelId=1&status=stop&pageIndex=1&searchKey=&eventSubmitDoStatus=true>
+Thu, 29 Nov 2018 10:34:52 engine.py[line:238] DEBUG Crawled (200) <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> (referer: http://otter.test:8888/pipeline_list.htm?channelId=1)
+Thu, 29 Nov 2018 10:34:52 otter.py[line:83] INFO http://otter.test:8888/?action=channelAction&channelId=1&status=start&pageIndex=1&searchKey=&eventSubmitDoStatus=true
+Thu, 29 Nov 2018 10:34:52 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> from <GET http://otter.test:8888/?action=channelAction&channelId=1&status=start&pageIndex=1&searchKey=&eventSubmitDoStatus=true>
+Thu, 29 Nov 2018 10:34:52 engine.py[line:238] DEBUG Crawled (200) <GET http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=> (referer: http://otter.test:8888/channelList.htm?pageIndex=1&searchKey=)
+Thu, 29 Nov 2018 10:34:52 otter.py[line:90] INFO channelId: 1, pageIndex: 1 has been restarted
+Thu, 29 Nov 2018 10:34:52 engine.py[line:295] INFO Closing spider (finished)
+Thu, 29 Nov 2018 10:34:52 statscollectors.py[line:47] INFO Dumping Scrapy stats:
+{'downloader/request_bytes': 6566,
+ 'downloader/request_count': 11,
+ 'downloader/request_method_count/GET': 10,
  'downloader/request_method_count/POST': 1,
- 'downloader/response_bytes': 38878,
- 'downloader/response_count': 10,
- 'downloader/response_status_count/200': 5,
+ 'downloader/response_bytes': 48864,
+ 'downloader/response_count': 11,
+ 'downloader/response_status_count/200': 6,
  'downloader/response_status_count/302': 5,
- 'dupefilter/filtered': 1,
  'finish_reason': 'finished',
- 'finish_time': datetime.datetime(2018, 11, 28, 11, 52, 43, 261603),
+ 'finish_time': datetime.datetime(2018, 11, 29, 2, 34, 52, 503188),
  'item_scraped_count': 1,
  'log_count/DEBUG': 13,
  'log_count/INFO': 9,
- 'memusage/max': 45821952,
- 'memusage/startup': 45821952,
+ 'memusage/max': 45826048,
+ 'memusage/startup': 45826048,
  'request_depth_max': 3,
- 'response_received_count': 5,
- 'scheduler/dequeued': 6,
- 'scheduler/dequeued/memory': 6,
- 'scheduler/enqueued': 6,
- 'scheduler/enqueued/memory': 6,
- 'start_time': datetime.datetime(2018, 11, 28, 11, 52, 41, 129225)}
-Wed, 28 Nov 2018 19:52:43 engine.py[line:326] INFO Spider closed (finished)
+ 'response_received_count': 6,
+ 'scheduler/dequeued': 7,
+ 'scheduler/dequeued/memory': 7,
+ 'scheduler/enqueued': 7,
+ 'scheduler/enqueued/memory': 7,
+ 'start_time': datetime.datetime(2018, 11, 29, 2, 34, 50, 526631)}
+Thu, 29 Nov 2018 10:34:52 engine.py[line:326] INFO Spider closed (finished)
+Thu, 29 Nov 2018 11:21:05 log.py[line:146] INFO Scrapy 1.5.1 started (bot: otter_monitor)
+Thu, 29 Nov 2018 11:21:05 log.py[line:149] INFO Versions: lxml 4.2.1.0, libxml2 2.9.8, cssselect 1.0.3, parsel 1.5.0, w3lib 1.19.0, Twisted 18.7.0, Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56) - [GCC 7.2.0], pyOpenSSL 18.0.0 (OpenSSL 1.0.2o  27 Mar 2018), cryptography 2.2.2, Platform Linux-2.6.32-754.2.1.el6.x86_64-x86_64-with-centos-6.10-Final
+Thu, 29 Nov 2018 11:21:05 crawler.py[line:38] INFO Overridden settings: {'BOT_NAME': 'otter_monitor', 'NEWSPIDER_MODULE': 'otter_monitor.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['otter_monitor.spiders']}
+Thu, 29 Nov 2018 11:21:05 middleware.py[line:53] INFO Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats']
+Thu, 29 Nov 2018 11:21:05 middleware.py[line:53] INFO Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+Thu, 29 Nov 2018 11:21:05 middleware.py[line:53] INFO Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'otter_monitor.middlewares.UserAgentMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+Thu, 29 Nov 2018 11:21:05 middleware.py[line:53] INFO Enabled item pipelines:
+['otter_monitor.pipelines.OtterPipeline']
+Thu, 29 Nov 2018 11:21:05 engine.py[line:256] INFO Spider opened
+Thu, 29 Nov 2018 11:21:05 logstats.py[line:48] INFO Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+Thu, 29 Nov 2018 11:21:05 telnet.py[line:60] DEBUG Telnet console listening on 127.0.0.1:6023
+Thu, 29 Nov 2018 11:21:05 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter.test%3A8888%2Frobots.txt> from <GET http://otter.test:8888/robots.txt>
+Thu, 29 Nov 2018 11:21:05 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter.test%3A8888%2Frobots.txt> (referer: None)
+Thu, 29 Nov 2018 11:21:05 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/channel_list.htm> from <POST http://otter.test:8888/login.htm>
+Thu, 29 Nov 2018 11:21:05 redirect.py[line:41] DEBUG Redirecting (302) to <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter01%3A8888%2Frobots.txt> from <GET http://otter01:8888/robots.txt>
+Thu, 29 Nov 2018 11:21:05 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/forbidden.htm?done=http%3A%2F%2Fotter01%3A8888%2Frobots.txt> (referer: None)
+Thu, 29 Nov 2018 11:21:06 engine.py[line:238] DEBUG Crawled (200) <GET http://otter01:8888/channel_list.htm> (referer: None)
+Thu, 29 Nov 2018 11:21:06 engine.py[line:238] DEBUG Crawled (200) <GET http://otter.test:8888/pipeline_list.htm?channelId=1> (referer: http://otter01:8888/channel_list.htm)
+Thu, 29 Nov 2018 11:21:06 scraper.py[line:237] DEBUG Scraped from <200 http://otter.test:8888/pipeline_list.htm?channelId=1>
+{'channelId': 1, 'pplId': '1', 'pplName': 'test_pip1', 'pplStatus': '工作中', 'lastSync': '2018-11-29 02:30:26'}
+Thu, 29 Nov 2018 11:21:06 engine.py[line:295] INFO Closing spider (finished)
+Thu, 29 Nov 2018 11:21:06 pipelines.py[line:24] WARNING curl -H "Content-Type: application/json" -X POST -d '{"systemName": "I-|-I", "alarmLevel": 1, "alarmType": 3, "monitorItem": "gfc_jdl", "params": {"Receiver": "Mr.Zhou", "Message": "Important!Important!Important!UC Vs. WC"}}' http://172.16.30.90:8081/api/sendAlarmMessage
+Thu, 29 Nov 2018 11:21:06 statscollectors.py[line:47] INFO Dumping Scrapy stats:
+{'downloader/request_bytes': 3275,
+ 'downloader/request_count': 7,
+ 'downloader/request_method_count/GET': 6,
+ 'downloader/request_method_count/POST': 1,
+ 'downloader/response_bytes': 27560,
+ 'downloader/response_count': 7,
+ 'downloader/response_status_count/200': 4,
+ 'downloader/response_status_count/302': 3,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2018, 11, 29, 3, 21, 6, 254622),
+ 'item_scraped_count': 1,
+ 'log_count/DEBUG': 9,
+ 'log_count/INFO': 7,
+ 'log_count/WARNING': 1,
+ 'memusage/max': 45830144,
+ 'memusage/startup': 45830144,
+ 'request_depth_max': 1,
+ 'response_received_count': 4,
+ 'scheduler/dequeued': 3,
+ 'scheduler/dequeued/memory': 3,
+ 'scheduler/enqueued': 3,
+ 'scheduler/enqueued/memory': 3,
+ 'start_time': datetime.datetime(2018, 11, 29, 3, 21, 5, 926451)}
+Thu, 29 Nov 2018 11:21:06 engine.py[line:326] INFO Spider closed (finished)

@@ -68,11 +68,14 @@ class OtterSpider(scrapy.Spider):
         for i in range(len(pplNames)):
             if status[i].xpath('text()').extract()[0].strip() != '工作中' or  (datetime.now()-datetime.strptime(lastSync[i].xpath('text()').extract()[0].strip(), "%Y-%m-%d %H:%M:%S")).seconds>30*60:
                 yield {"channelId": channelId,
-                        "pplId": pplIds[i].xpath('text()').extract()[0].strip(),
-                        "pplName": pplNames[i].xpath('text()').extract()[0].strip(),
-                        "pplStatus": status[i].xpath('text()').extract()[0].strip(),
-                        "lastSync": lastSync[i].xpath('text()').extract()[0].strip()}
-                yield scrapy.Request("http://otter.test:8888/channel_list.htm?action=channelAction&channelId=%d&status=stop&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (channelId, pageIndex), \
+                    "pplId": pplIds[i].xpath('text()').extract()[0].strip(),
+                    "pplName": pplNames[i].xpath('text()').extract()[0].strip(),
+                    "pplStatus": status[i].xpath('text()').extract()[0].strip(),
+                    "lastSync": lastSync[i].xpath('text()').extract()[0].strip()}
+                if (datetime.now()-datetime.strptime(lastSync[i].xpath('text()').extract()[0].strip(), "%Y-%m-%d %H:%M:%S")).seconds >= 120*60 and \
+                    (datetime.now()-datetime.strptime(lastSync[i].xpath('text()').extract()[0].strip(), "%Y-%m-%d %H:%M:%S")).seconds < 150*60:
+                    yield scrapy.Request("http://otter.test:8888/channel_list.htm?action=channelAction&channelId=%d&status=stop&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (channelId, pageIndex), \
+                        dont_filter=True, 
                         callback=self.stop_channel, \
                         meta={'pageIndex':pageIndex, 'channelId':channelId})
 
@@ -81,6 +84,7 @@ class OtterSpider(scrapy.Spider):
         pageIndex = response.meta['pageIndex']
         self.logger.info('http://otter.test:8888/?action=channelAction&channelId=%d&status=start&pageIndex=%d&searchKey=&eventSubmitDoStatus=true' % (channelId, pageIndex))
         yield scrapy.Request("http://otter.test:8888/?action=channelAction&channelId=%d&status=start&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (channelId, pageIndex), \
+            dont_filter=True, 
             callback=self.start_channel, \
             meta={'pageIndex': pageIndex, 'channelId': channelId})
 
