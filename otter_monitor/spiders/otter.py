@@ -12,12 +12,18 @@ import urllib.request
 
 class OtterSpider(scrapy.Spider):
     name = 'otter'
-    allowed_domains = ['otter.test']
+	host = 'localhost'
+	port = '8080'
+    #allowed_domains = ['otter.test']
+	def __init__(self, host='localhost', port=8080 *args, **kwargs):
+	    self.host = host
+		self.port = port
+		super(OtterSpider, self).__init__(*args, **kwargs)
 
     def start_requests(self):
-        login_url = 'http://otter.test:8888/login.htm'
+        login_url = 'http://%s:%s/login.htm' % (self.host, self.port)
         formdata = {
-            "redir": "http://otter.test:8888",
+            "redir": "http://%s:%s" % (self.host, self.port),
             "action": "user_action",
             "event_submit_do_login": "1",
             "_fm.l._0.n": "admin",
@@ -34,7 +40,7 @@ class OtterSpider(scrapy.Spider):
         pageIndex = response.xpath("//div[@class='page']/b/text()").extract()
         channels = response.xpath('//tr/td[@width="5%"]/text()').extract()
         for c in channels:
-            yield scrapy.Request("http://otter.test:8888/pipeline_list.htm?channelId=%d" % int(c), \
+            yield scrapy.Request("http://%s:%s/pipeline_list.htm?channelId=%d" % (self.host, self.port, int(c)), \
                 dont_filter=True, \
                 callback=self.parse_pipeline, meta={'pageIndex': int(pageIndex[0]), 'channelId': int(c)})
         # has next ?
@@ -67,14 +73,15 @@ class OtterSpider(scrapy.Spider):
         lastSync = lastSync[1::int(len(lastSync)/len(pplNames))]
         for i in range(len(pplNames)):
             if status[i].xpath('text()').extract()[0].strip() != '工作中' or  (datetime.now()-datetime.strptime(lastSync[i].xpath('text()').extract()[0].strip(), "%Y-%m-%d %H:%M:%S")).seconds>30*60:
-                yield {"channelId": channelId,
+                yield {"host": self.host,
+				    "channelId": channelId,
                     "pplId": pplIds[i].xpath('text()').extract()[0].strip(),
                     "pplName": pplNames[i].xpath('text()').extract()[0].strip(),
                     "pplStatus": status[i].xpath('text()').extract()[0].strip(),
                     "lastSync": lastSync[i].xpath('text()').extract()[0].strip()}
                 if (datetime.now()-datetime.strptime(lastSync[i].xpath('text()').extract()[0].strip(), "%Y-%m-%d %H:%M:%S")).seconds >= 120*60 and \
                     (datetime.now()-datetime.strptime(lastSync[i].xpath('text()').extract()[0].strip(), "%Y-%m-%d %H:%M:%S")).seconds < 150*60:
-                    yield scrapy.Request("http://otter.test:8888/channel_list.htm?action=channelAction&channelId=%d&status=stop&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (channelId, pageIndex), \
+                    yield scrapy.Request("http://%s:%s/channel_list.htm?action=channelAction&channelId=%d&status=stop&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (self.host, self.port, channelId, pageIndex), \
                         dont_filter=True, 
                         callback=self.stop_channel, \
                         meta={'pageIndex':pageIndex, 'channelId':channelId})
@@ -82,11 +89,11 @@ class OtterSpider(scrapy.Spider):
     def stop_channel(self, response):
         channelId = response.meta['channelId']
         pageIndex = response.meta['pageIndex']
-        self.logger.info('http://otter.test:8888/?action=channelAction&channelId=%d&status=start&pageIndex=%d&searchKey=&eventSubmitDoStatus=true' % (channelId, pageIndex))
-        yield scrapy.Request("http://otter.test:8888/?action=channelAction&channelId=%d&status=start&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (channelId, pageIndex), \
+        self.logger.info('http://%s:%s/?action=channelAction&channelId=%d&status=start&pageIndex=%d&searchKey=&eventSubmitDoStatus=true' % (self.host, self.port, channelId, pageIndex))
+        yield scrapy.Request("http://%s:%s/?action=channelAction&channelId=%d&status=start&pageIndex=%d&searchKey=&eventSubmitDoStatus=true" % (self.host, self.port, channelId, pageIndex), \
             dont_filter=True, 
             callback=self.start_channel, \
             meta={'pageIndex': pageIndex, 'channelId': channelId})
 
     def start_channel(self, response):
-        self.logger.info('channelId: %s, pageIndex: %s has been restarted' % (response.meta['channelId'], response.meta['pageIndex']))
+        self.logger.info('host: %s, channelId: %s, pageIndex: %s has been restarted' % (self.host, response.meta['channelId'], response.meta['pageIndex']))

@@ -46,8 +46,8 @@ class OtterPipeline(object):
 -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - --\n \
 -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - --\n')
                 for item in alertSortList:
-                    f.write('[%s] - Channel ID: %s, Pipeline ID: %s, Pipeline Name: %s, mainstem状态: %s, 最后位点时间: %s\n' %
-                        (datetime.now(), item['channelId'], item['pplId'], item['pplName'], item['pplStatus'], item['lastSync']))
+                    f.write('[%s] - Host: %s, Channel ID: %s, Pipeline ID: %s, Pipeline Name: %s, mainstem状态: %s, 最后位点时间: %s\n' %
+                        (datetime.now(), item['host'], item['channelId'], item['pplId'], item['pplName'], item['pplStatus'], item['lastSync']))
             else:
                 f.write('[%s] - \n' % datetime.now())
         # Should alert with dingding ?
@@ -55,5 +55,5 @@ class OtterPipeline(object):
         params = {}
         if len(alertDingList) > 0:
             params['Receiver'] = 'Mr.Zhou'
-            params['Message'] = 'Important!Important!Important!UC Vs. WC'
+            params['Message'] = 'Important!Important!Important!UC Vs. CC'
             alert2DingDing(alert_item='otppldzt', **params)
