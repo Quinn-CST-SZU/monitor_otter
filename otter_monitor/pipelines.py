@@ -7,27 +7,23 @@
 
 import os, re, json, subprocess, logging
 from datetime import datetime, timedelta
-from collections import Counter
 
 def getAlertNums(host):
     # tail alert log
-    pipe = subprocess.Popen("tail -n 400 /kettle/scripts/log/alert_otter.log | grep -v -e '---*' -e '- $'", shell=True, stdout=subprocess.PIPE)
+    pipe = subprocess.Popen("tail -n 200 log/otter_restart.log", shell=True, stdout=subprocess.PIPE)
     lines = pipe.stdout.readlines()
     # extract info
-    l = []
-    pattern='^\[(\d+\-\d+\-\d+ \d+:\d+:\d+)\] - Host:(\d+\.\d+\.\d+\.\d+), Channel ID: (\d+).*$'
+    d = {}
+    pattern='^\[(\d+\-\d+\-\d+ \d+:\d+:\d+)\] - Host:(\d+\.\d+\.\d+\.\d+), Channel ID: (\d+), Pipeline ID: (\d+), Pipeline Name: ([0-9a-zA-Z_]+).*$'
     regex=re.compile(pattern)
     for line in lines:
         r = regex.match(line.decode('utf-8'))
         if not r:
             continue
         grp = r.groups()
-        if datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S') > datetime.now()-timedelta(hours=3) and grp[1] == host:
-            l.append(grp)
-    # calc alert record nums
-    c = Counter(i[2] for i in l)
-    # 160/180: channelId fail with 160 minutes in 180 minutes
-    return len(i for i in c.values() if i > 160/5)
+        if grp[1] == host and (datetime.now() - datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S')).hours < 5:
+            d[(grp[1], grp[2], grp[3])] = d.get((grp[1], grp[2], grp[3]), default=[]).append(datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S'))
+    return len([k for (k,v) in d.items() if len(v)>=3])
     
 def alert2DingDing(alert_item, alert_level=1, alart_type=3, **params):
     '''
@@ -61,7 +57,7 @@ class OtterPipeline(object):
         function docstring
         '''
         alertSortList = sorted(self.alertList, key=lambda k:k['channelId'])
-        with open("log/alert_info.log", "a") as f:
+        with open("log/otter_alert.log", "a") as f:
             if len(alertSortList) > 0:
                 f.write('-- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - --\n-- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - -- - --\n')
                 for item in alertSortList:
@@ -70,6 +66,10 @@ class OtterPipeline(object):
                     self.host = item['host']
             else:
                 f.write('[%s] - \n' % datetime.now())
+        with open("log/otter_restart.log", "a") as f:
+            for item in [i for i in alertSortList if (datetime.now()-datetime.strptime(i['lastSync'], '%Y-%m-%d %H:%M:%S')).seconds > 120*60]:
+                f.write('[%s] - Host: %s, Channel ID: %s, Pipeline ID: %s, Pipeline Name: %s' %
+                    (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), item['host'], item['channelId'], item['pplId'], item['pplName']))
         # Should alert with dingding ?
         if not self.host:
             return
