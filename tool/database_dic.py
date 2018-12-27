@@ -6,7 +6,7 @@ import xlwt, pymysql
 output_file = "fb4_dic.xls"
 
 # 创建数据库连接
-conn = pymysql.connect(host='172.16.5.23', port=3319, user='dbuser', passwd='Fb4@ff2763', db='test')
+conn = pymysql.connect(host='localhost', port=3306, user='dbuser', passwd='dbpass', db='test')
 
 sql = '''
 SELECT concat(concat(t1.table_schema, '.'), t1.table_name) table_name
