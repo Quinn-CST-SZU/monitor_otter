@@ -3,7 +3,7 @@
 
 import xlwt, pymysql
 
-output_file = "fb4_dic.xls"
+output_file = "nbest_dic.xls"
 
 # 创建数据库连接
 conn = pymysql.connect(host='localhost', port=3306, user='dbuser', passwd='dbpass', db='test')
