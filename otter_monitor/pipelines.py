@@ -68,7 +68,7 @@ class OtterPipeline(object):
                 f.write('[%s] - \n' % datetime.now())
         with open("log/otter_restart.log", "a") as f:
             for item in [i for i in alertSortList if (datetime.now()-datetime.strptime(i['lastSync'], '%Y-%m-%d %H:%M:%S')).seconds > 120*60]:
-                f.write('[%s] - Host: %s, Channel ID: %s, Pipeline ID: %s, Pipeline Name: %s' %
+                f.write('[%s] - Host: %s, Channel ID: %s, Pipeline ID: %s, Pipeline Name: %s\n' %
                     (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), item['host'], item['channelId'], item['pplId'], item['pplName']))
         # Should alert with dingding ?
         if not self.host:
