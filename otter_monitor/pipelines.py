@@ -26,6 +26,7 @@ def getAlertNums(host):
                 d[(grp[1], grp[2], grp[3])].append(datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S'))
             else:
                 d[(grp[1], grp[2], grp[3])] = []
+                d[(grp[1], grp[2], grp[3])].append(datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S'))
     for (k,v) in d.items():
         if len(v) > 0 and (datetime.now() - max(v)).seconds/60 > 10:
             d[k] = []
