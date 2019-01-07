@@ -21,7 +21,7 @@ def getAlertNums(host):
         if not r:
             continue
         grp = r.groups()
-        if grp[1] == host and (datetime.now() - datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S')).seconds/3600 < 5:
+        if grp[1] == host and datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S')).days==0 and (datetime.now() - datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S')).seconds/3600 < 5:
             if (grp[1], grp[2], grp[3]) in d:
                 d[(grp[1], grp[2], grp[3])].append(datetime.strptime(grp[0], '%Y-%m-%d %H:%M:%S'))
             else:
